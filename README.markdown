@@ -96,135 +96,23 @@ In general you can modify
 Since [Style](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/main/java/de/keyboardsurfer/android/widget/crouton/Style.java) is the general entry point for tweaking Croutons, go and see for yourself what can be done with it.
 
 ## Building
-### Gradle
 
-#### From maven central
+Step 1. Add the JitPack repository to your build file
 
-Add maven central to your `build.gradle`:
-
-```groovy
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-}
- 
-repositories {
-  mavenCentral()
-}
+Add it in your root build.gradle at the end of repositories:
+```
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 ```
 
-Then declare Crouton within your dependencies:
+Step 2. Add the dependency
 
-```groovy
-dependencies {
-  ...
-  compile('de.keyboardsurfer.android.widget:crouton:1.8.5@aar') {
-    // exclusion is not necessary, but generally a good idea.
-    exclude group: 'com.google.android', module: 'support-v4'
-  }
-  ...
-}
 ```
-
-
-### Maven
-
-#### From maven central
-
-To use crouton within your maven build simply add
-
-```xml
-<dependency>
-  <artifactId>crouton</artifactId>
-  <version>${crouton.version}</version>
-  <groupId>de.keyboardsurfer.android.widget</groupId>
-</dependency>
+	dependencies {
+	        compile 'com.github.xingstarx:Crouton:1.8.6'
+	}
 ```
-
-to your pom.xml
-
-If you also want the sources or javadoc add the respective classifier  
-
-```xml
-  <classifier>sources</classifier>
-```
-
-or
-
-```xml
-  <classifier>javadoc</classifier>
-```
-to the dependency.
-
-If you are referencing a newer version of the Android Support Library in your application, you might want to exclude Crouton's dependency like this:
-
-```xml
-<dependency>
-	<artifactId>crouton</artifactId>
-	<version>${crouton.version}</version>
-	<groupId>de.keyboardsurfer.android.widget</groupId>
-	<exclusions>
-	    <exclusion>
-	        <groupId>com.android.support</groupId>
-	        <artifactId>support-v4</artifactId>
-	    </exclusion>
-	</exclusions>
-</dependency>
-```
-
-### DIY
-
-The build requires Gradle. Operations are very simple:
-
-* install [gradle](http://www.gradle.org/)
-* `gradle assemble` builds all artifacts
-* `gradle jar` builds the jar
-
-After putting Crouton in a repository you can add it as dependency.
-
-```groovy
-compile('de.keyboardsurfer.android.widget:crouton:1.8.5@aar') {
-  exclude group: 'com.google.android', module: 'support-v4'
-}
-```
-
-###Building and Signing
-
-In order to build and sign Crouton locally you'll need to rename `gradle.properties.sample` to `gradle.properties`.
-
-## Contribution
-
-###Questions
-
-Questions regarding Crouton can be asked on [StackOverflow, using the crouton tag](http://stackoverflow.com/questions/tagged/crouton).
-
-### Pull requests welcome
-
-Feel free to contribute to Crouton.
-
-Either you found a bug or have created a new and awesome feature, just create a pull request.
-
-If you want to start to create a new feature or have any other questions regarding Crouton, [file an issue](https://github.com/keyboardsurfer/Crouton/issues/new).
-I'll try to answer as soon as I find the time.
-
-Please note, if you're working on a pull request, make sure to use the [develop branch](https://github.com/keyboardsurfer/Crouton/tree/develop) as your base.
-
-### Formatting
-
-For contributors using Eclipse there's a formatter available at the [download section](https://github.com/downloads/keyboardsurfer/Crouton/Crouton_Eclipseformatter.xml).
-
-In order to reduce merging pains on my end, please use this formatter or format your commit in a way similar to it's example.
-
-If you're using IDEA, the Eclipse Formatter plugin should allow you to use the formatter as well.
-
-## License
-
-* [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
-
-## Attributions
-
-The initial version was written by  <a href="https://plus.google.com/u/0/117509657298845443204?rel=author">Benjamin Weiss</a>.
-The name and the idea of [Crouton](https://github.com/keyboardsurfer/Crouton/blob/master/library/src/de/keyboardsurfer/android/widget/crouton/Crouton.java) originates in a [blog article](http://android.cyrilmottier.com/?p=773) by Cyril Mottier.
-
-The Crouton logo has been created by [Marie Schweiz](http://marie-schweiz.de).
