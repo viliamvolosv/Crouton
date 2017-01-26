@@ -216,7 +216,7 @@ final class Manager extends Handler {
         }
         handleTranslucentActionBar((ViewGroup.MarginLayoutParams) params, activity);
         handleActionBarOverlay((ViewGroup.MarginLayoutParams) params, activity);
-
+        handleStatusBar((ViewGroup.MarginLayoutParams) params, activity);
         activity.addContentView(croutonView, params);
       }
     }
@@ -263,7 +263,7 @@ final class Manager extends Handler {
       }
     }
   }
-/*
+
   @TargetApi(11)
   private void handleActionBarOverlay(ViewGroup.MarginLayoutParams params, Activity activity) {
     // ActionBar overlay is only available as of Android 3.0 Honeycomb.
@@ -274,19 +274,13 @@ final class Manager extends Handler {
       }
     }
   }
-*/
-  private void handleActionBarOverlay(ViewGroup.MarginLayoutParams params, Activity activity) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-      final boolean flags = activity.getWindow().hasFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-      if (flags) {
-        final int actionBarContainerId = Resources.getSystem().getIdentifier("action_bar_container", "id", "android");
-        final View actionBarContainer = activity.findViewById(actionBarContainerId);
-        // The action bar is present: the app is using a Holo theme.
-        if (actionBarContainer != null) {
-          final ViewGroup.MarginLayoutParams marginParams = params;
-          marginParams.topMargin = actionBarContainer.getBottom();
-        }
-      }
+
+  private void handleStatusBar(ViewGroup.MarginLayoutParams params, Activity activity) {
+    int statusBarHeight = 0;
+    int resourceId = Resources.getSystem().getIdentifier("status_bar_height", "dimen", "android");
+    if (resourceId > 0) {
+      statusBarHeight = Resources.getSystem().getDimensionPixelSize(resourceId);
+      params.topMargin+=statusBarHeight;
     }
   }
 
